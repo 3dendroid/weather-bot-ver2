@@ -1,0 +1,4 @@
+aiogram~=2.12
+environs~=8.0.0
+emoji~=0.6.0
+requests~=2.25.1
