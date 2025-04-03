@@ -5,7 +5,7 @@ from utils.misc.notify_admins import on_startup_notify
 
 
 async def on_startup(dispatcher):
-    # Уведомляет про запуск
+    # Notification of successful bot launch
     await on_startup_notify(dispatcher)
 
 
