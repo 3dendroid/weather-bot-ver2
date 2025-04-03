@@ -10,20 +10,20 @@ from loader import dp
 
 @dp.message_handler(CommandStart())
 async def bot_start(message: types.Message):
-    await message.answer(f"Привет, {message.from_user.full_name}!")
-    await message.answer("Напиши мне название города и я пришлю сводку погоды!")
+    await message.answer(f"Hello, {message.from_user.full_name}!")
+    await message.answer("Write me the name of the city and I will send you the weather report!")
 
 
 @dp.message_handler()
 async def get_weather_def(message: types.Message):
     code_to_emoji = {
-        "Clear": "Ясно \U00002600",
-        "Clouds": "Облачно \U00002601",
-        "Rain": "Дождь \U00002614",
-        "Drizzle": "Дождь \U00002614",
-        "Thunderstorm": "Гроза \U000026A1",
-        "Snow": "Снег \U0001F328",
-        "Mist": "Туман \U0001F32B"
+        "Clear": "Clear \U00002600",
+        "Clouds": "Clouds \U00002601",
+        "Rain": "Rain \U00002614",
+        "Drizzle": "Drizzle \U00002614",
+        "Thunderstorm": "Thunderstorm \U000026A1",
+        "Snow": "Snow \U0001F328",
+        "Mist": "Mist \U0001F32B"
     }
 
     try:
@@ -39,7 +39,7 @@ async def get_weather_def(message: types.Message):
         if weather_description in code_to_emoji:
             wd = code_to_emoji[weather_description]
         else:
-            wd = "Посмотри в окно, не пойму что там за погода!"
+            wd = "Look out the window, I don’t understand what kind of weather it is there!"
 
         humidity = data["main"]["humidity"]
         pressure = data["main"]["pressure"]
@@ -49,9 +49,9 @@ async def get_weather_def(message: types.Message):
         length_of_the_day = datetime.datetime.fromtimestamp(data["sys"]["sunset"]) - datetime.datetime.fromtimestamp(
             data["sys"]["sunrise"])
 
-        await message.reply(f"Погода в городе: {city}\nТемпература: {cur_weather}C° {wd}\n"
-                            f"Влажность: {humidity}%\nДавление: {pressure} мм.рт.ст\nВетер: {wind} м/с\n"
-                            f"Восход солнца: {sunrise_timestamp}\nЗакат солнца: {sunset_timestamp}\nПродолжительность дня: {length_of_the_day}\n"
+        await message.reply(f"Weather in the city: {city}\nTemperature: {cur_weather}C° {wd}\n"
+                            f"Humidity: {humidity}%\nPressure: {pressure} mmHg\nWind: {wind} m/s\n"
+                            f"Sunrise: {sunrise_timestamp}\nSunset: {sunset_timestamp}\nDay length: {length_of_the_day}\n"
                             )
     except:
-        await message.reply("\U00002620 Проверьте название города \U00002620")
+        await message.reply("\U00002620 Check the name of the city \U00002620")
